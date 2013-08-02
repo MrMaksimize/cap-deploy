@@ -13,9 +13,11 @@ set :scm_passphrase, ""
 set :deploy_to, "/var/drupals/capistrano"
 set :deploy_via, :remote_cache
 
-task :uname do
-  run "uname -a"
+task :update_db do
+  drush updb
 end
+
+# after "deploy", "update_db"
 
 # role :web, "your web-server here"                          # Your HTTP server, Apache/etc
 # role :app, "your app-server here"                          # This may be the same as your `Web` server
