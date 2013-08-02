@@ -1,0 +1,12 @@
+{
+  "default": {
+    "default": {
+      "username": "capistranoDBA",
+      "password": "capistranoPASS",
+      "database": "capistranoDB",
+      "host": "localhost",
+      "port": "3306",
+      "driver": "mysql"
+    }
+  }
+}
