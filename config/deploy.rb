@@ -10,7 +10,7 @@ set :use_sudo, false
 set :scm, :git
 set :repository,  "https://github.com/dsdobrzynski/cap-deploy.git"
 set :scm_passphrase, ""
-set :deploy_to, "/var/drupals/capistrano/www"
+set :deploy_to, "/var/drupals/capistrano"
 set :deploy_via, :remote_cache
 
 task :uname do
