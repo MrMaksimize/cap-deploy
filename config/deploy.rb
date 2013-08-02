@@ -1,12 +1,20 @@
+set :stages, %w(development)
+set :default_stage, "development"
+require 'capistrano/ext/multistage'
+
 set :application, "site-deploy"
+set :user, "501"
+set :group, "dialout"
 
 set :scm, :git
-set :repository,  "git@github.com:dsdobrzynski/cap-tut.git"
+set :repository,  "https://github.com/dsdobrzynski/cap-deploy.git"
 set :scm_passphrase, ""
+set :deploy_to, "/var/drupals/capistrano/www"
+set :deploy_via, :remote_cache
 
-set :user, "vagrant"
-
-
+task :uname do
+  run "uname -a"
+end
 
 # role :web, "your web-server here"                          # Your HTTP server, Apache/etc
 # role :app, "your app-server here"                          # This may be the same as your `Web` server
