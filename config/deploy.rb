@@ -14,10 +14,10 @@ set :deploy_to, "/var/drupals/capistrano"
 set :deploy_via, :remote_cache
 
 task :update_db do
-  drush updb
+ "drush updb"
 end
 
-# after "deploy", "update_db"
+after "deploy", "update_db"
 
 # role :web, "your web-server here"                          # Your HTTP server, Apache/etc
 # role :app, "your app-server here"                          # This may be the same as your `Web` server
