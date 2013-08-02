@@ -3,8 +3,9 @@ set :default_stage, "development"
 require 'capistrano/ext/multistage'
 
 set :application, "site-deploy"
-set :user, "501"
-set :group, "dialout"
+set :user, "vagrant"
+# set :group, "dialout"
+set :use_sudo, false
 
 set :scm, :git
 set :repository,  "https://github.com/dsdobrzynski/cap-deploy.git"
