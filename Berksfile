@@ -1,4 +1,4 @@
 site :opscode
 
-cookbook "drupal", git: "https://github.com/MrMaksimize/drupal_cookbook.git", branch: "kw"
+cookbook "drupal", path: "/Users/MrMaksimize/Work/drupal_cookbook_3"
 cookbook "solo-helper", git: "https://github.com/glennpratt/solo-helper_cookbook.git"
