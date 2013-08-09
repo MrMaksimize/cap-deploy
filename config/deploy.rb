@@ -1,7 +1,7 @@
 set :application, 'capkw'
 set :repo_url, 'https://github.com/MrMaksimize/cap-deploy.git'
 
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+ ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 set :deploy_to, '/var/drupals/capkw'
 # set :scm, :git
