@@ -13,11 +13,22 @@ set :scm_passphrase, ""
 set :deploy_to, "/var/drupals/capistrano"
 set :deploy_via, :remote_cache
 
-task :dump_db do
-  run "cd /var/drupals/capistrano/www && drush sql-dump > /var/drupals/capistrano/backups/db.sql"
+task :backup_site do
+  run "cd /var/drupals/capistrano/www && drush archive-dump --destination=/var/drupals/capistrano/backups/backup_`date +\"%Y-%m-%d-%T\"`.tar"
 end
 
-before "deploy:update_code", "dump_db"
+task :apply_changes do
+  run "cd /var/drupals/capistrano/www"
+  run "drush updb -y"
+  run "drush rr -y"
+  run "drush fra -y"
+  run "drush updb -y"
+  run "drush cc all"
+end
+
+before "deploy:update_code", "backup_site"
+
+after "deploy:update_code", "apply_changes"
 
 # role :web, "your web-server here"                          # Your HTTP server, Apache/etc
 # role :app, "your app-server here"                          # This may be the same as your `Web` server
