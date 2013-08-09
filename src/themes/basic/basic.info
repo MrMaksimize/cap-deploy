@@ -1,0 +1,9 @@
+name = capkw
+description = Default theme for capkw
+
+engine = phptemplate
+base theme = kalatheme
+core = 7.x
+php = 5.2
+
+stylesheets[all][] = styles.css
