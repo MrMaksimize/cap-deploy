@@ -14,7 +14,7 @@ set :deploy_to, "/var/drupals/capistrano"
 set :deploy_via, :remote_cache
 
 task :dump_db do
-  run "drush sql-dump > /var/drupals/capistrano/backups/db.sql"
+  run "cd /var/drupals/capistrano/www && drush sql-dump > /var/drupals/capistrano/backups/db.sql"
 end
 
 before "deploy:update_code", "dump_db"
