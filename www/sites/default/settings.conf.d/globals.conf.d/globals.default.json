@@ -1,5 +1,0 @@
-{
-    "update_free_access": false,
-    "drupal_hash_salt": "changmetosomethingrandomandlong",
-    "db_url": "mysql://capistranoDBA:capistranoPASS@localhost/capistranoDB"
-}
