@@ -1,17 +1,30 @@
-set :application, 'capkw'
-set :repo_url, 'https://github.com/MrMaksimize/cap-deploy.git'
+set :application, "capdeploy"
+set :repository,  "https://github.com/dsdobrzynski/cap-deploy"
 
- ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
+# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-set :deploy_to, '/var/drupals/capkw'
-# set :scm, :git
+set :deploy_to, "/var/drupals/capdeploy"
 
-set :format, :pretty
-set :log_level, :debug
-# set :pty, true
+role :web, "capdeploy.dev"                          # Your HTTP server, Apache/etc
+role :app, "capdeploy.dev"                          # This may be the same as your `Web` server
+role :db,  "capdeploy.dev", :primary => true # This is where Rails migrations will run
+# role :db,  "your slave db-server here"
 
-# set :linked_files, %w{config/database.yml}
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :user, "vagrant"
+# set :use_sudo, false
 
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
-# set :keep_releases, 5
+# if you want to clean up old releases on each deploy uncomment this:
+# after "deploy:restart", "deploy:cleanup"
+
+# if you're still using the script/reaper helper you will need
+# these http://github.com/rails/irs_process_scripts
+
+# If you are using Passenger mod_rails uncomment this:
+# namespace :deploy do
+#   task :start do ; end
+#   task :stop do ; end
+#   task :restart, :roles => :app, :except => { :no_release => true } do
+#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+#   end
+# end

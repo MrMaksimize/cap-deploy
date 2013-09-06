@@ -1,7 +1,7 @@
 
 Vagrant.configure("2") do |config|
   # Variables to Change
-  project_name = 'capkw'
+  project_name = 'capdeploy'
   box_ip = '10.33.10.31'
   box_memory = 2048
   # End Variables To Change
@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
 
   project = "#{project_name}"
 
-  config.vm.hostname = "vdev-#{project}"
+  # config.vm.hostname = "vdev-#{project}"
 
   config.vm.synced_folder ".", "/var/drupals/#{project}", :nfs => true
 
@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
         :sites => {
           "#{project}.dev" => {
             :root => "/var/drupals/#{project}",
-            :doc_root => "/var/drupals/#{project}/current",
+            :doc_root => "/var/drupals/#{project}/current/www",
             :db => "#{project}DB",
             :db_username => "#{project}DBA",
             :db_password => "#{project}PASS",
