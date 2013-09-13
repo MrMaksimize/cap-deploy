@@ -28,3 +28,10 @@ set :deploy_via, :remote_cache
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
+
+task :backup_database, :roles => :web do
+  run "cd #{deploy_to}/current"
+  run "pwd"
+  drush sql-dump
+end
+
