@@ -3,6 +3,9 @@ set :default_stage, "dev"
 require 'capistrano/ext/multistage'
 
 set :application, "capdeploy"
+set :user, "vagrant"
+set :group, "www-data"
+
 set :repository,  "https://github.com/dsdobrzynski/cap-deploy"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
