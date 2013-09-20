@@ -1,4 +1,4 @@
-set :stages, %w(production dev local)
+set :stages, %w(prod dev local)
 set :default_stage, "dev"
 require 'capistrano/ext/multistage'
 
@@ -30,8 +30,7 @@ set :deploy_via, :remote_cache
 # end
 
 task :backup_database, :roles => :web do
-  run "cd #{deploy_to}/current"
-  run "pwd"
-  drush sql-dump
+  run "drush sql-dump --root=#{deploy_to}/current/www --result-file=#{deploy_to}/build/backups/$(date +%m-%d-%Y-%H-%M-%S)_db.sql"
 end
 
+before :deploy, :backup_database
