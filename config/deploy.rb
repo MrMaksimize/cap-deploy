@@ -13,11 +13,11 @@ set :deploy_to, "/var/drupals/capdeploy/current/www"
 set :deploy_via, :remote_cache
 
 task :backup_site do
-  run "drush archive-dump --root=#{deploy_to} --destination=#{deploy_to}/build/backups/site/$(date +%m-%d-%Y-%T)_site.tar"
+  run "drush archive-dump --root=/var/drupals/capdeploy/current/www --destination=/var/drupals/capdeploy/build/backups/site/$(date +%m-%d-%Y-%T)_site.tar"
 end
 
 task :backup_database do
-  run "drush sql-dump --root=#{deploy_to} --result-file=#{deploy_to}/build/backups/db/$(date +%m-%d-%Y-%T)_db.sql"
+  run "drush sql-dump --root=#{deploy_to} --result-file=/var/drupals/capdeploy/build/backups/db/$(date +%m-%d-%Y-%T)_db.sql"
 end
 
 task :apply_changes do
@@ -30,6 +30,7 @@ task :apply_changes do
 end
 
 before "deploy:update_code", "backup_site"
+before "deploy:update_code", "backup_database"
 
 after "deploy:update_code", "apply_changes"
 
