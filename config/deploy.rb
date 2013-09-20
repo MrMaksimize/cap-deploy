@@ -6,13 +6,32 @@ set :application, "capdeploy"
 set :user, "vagrant"
 set :group, "www-data"
 
-set :repository,  "https://github.com/dsdobrzynski/cap-deploy"
-
-set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-
-set :deploy_to, "/var/drupals/capdeploy"
+set :scm, :git
+set :repository,  "https://github.com/dsdobrzynski/cap-deploy.git"
+set :scm_passphrase, ""
+set :deploy_to, "/var/drupals/capdeploy/current/www"
 set :deploy_via, :remote_cache
+
+task :backup_site do
+  run "drush archive-dump --root=#{deploy_to} --destination=#{deploy_to}/build/backups/site/$(date +%m-%d-%Y-%T)_site.tar"
+end
+
+task :backup_database do
+  run "drush sql-dump --root=#{deploy_to} --result-file=#{deploy_to}/build/backups/db/$(date +%m-%d-%Y-%T)_db.sql"
+end
+
+task :apply_changes do
+  run "cd #{deploy_to}"
+  run "drush updb -y"
+  run "drush rr -y"
+  run "drush fra -y"
+  run "drush updb -y"
+  run "drush cc all"
+end
+
+before "deploy:update_code", "backup_site"
+
+after "deploy:update_code", "apply_changes"
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
@@ -28,9 +47,3 @@ set :deploy_via, :remote_cache
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
-
-task :backup_database, :roles => :web do
-  run "drush sql-dump --root=#{deploy_to}/current/www --result-file=#{deploy_to}/build/backups/$(date +%m-%d-%Y-%H-%M-%S)_db.sql"
-end
-
-before :deploy, :backup_database
