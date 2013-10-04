@@ -1,0 +1,21 @@
+<?php
+/**
+ * @file
+ * Code for the Zotero Feedback Form feature.
+ */
+
+include_once 'zotero_feedback_form.features.inc';
+
+function zotero_feedback_form_form_alter(&$form, &$form_state, $form_id) {
+  //dpm($_SERVER); 
+  // Modification for the form with id feedback_form goes here.
+
+  if ($form_id == 'feedback_form_entityform_edit_form') {
+
+    $page_referrer = $_SERVER['HTTP_REFERER'];
+
+    // Set the default value to be the page referrer URL.
+    $form['field_feedback_form_pageref']['und']['0']['value']['#default_value'] = $page_referrer;
+  };
+  
+}

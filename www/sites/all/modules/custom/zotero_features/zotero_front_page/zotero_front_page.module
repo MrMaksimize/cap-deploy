@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Zotero Front Page feature.
+ */
+
+include_once 'zotero_front_page.features.inc';
