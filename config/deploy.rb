@@ -29,11 +29,6 @@ task :apply_changes do
   run "drush cc all"
 end
 
-before "deploy:update_code", "backup_site"
-before "deploy:update_code", "backup_database"
-
-after "deploy:update_code", "apply_changes"
-
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 
