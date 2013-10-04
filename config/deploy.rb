@@ -12,21 +12,15 @@ set :scm_passphrase, ""
 set :deploy_to, "/var/drupals/capdeploy"
 set :deploy_via, :remote_cache
 
+set :drupal_path, "#{deploy_to}/current/www"
+set :ref_db_name, "capdeploy_db.sql"
+
 task :backup_site do
   run "drush archive-dump --root=#{deploy_to}/current/www --destination=#{deploy_to}/build/backups/site/$(date +%m-%d-%Y-%T)_site.tar"
 end
 
 task :backup_database do
   run "drush sql-dump --root=#{deploy_to} --result-file=#{deploy_to}/build/backups/db/$(date +%m-%d-%Y-%T)_db.sql"
-end
-
-task :apply_changes do
-  run "cd #{deploy_to}/current/www"
-  run "drush updb -y"
-  run "drush rr -y"
-  run "drush fra -y"
-  run "drush updb -y"
-  run "drush cc all"
 end
 
 # if you want to clean up old releases on each deploy uncomment this:
