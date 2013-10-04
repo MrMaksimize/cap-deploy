@@ -7,7 +7,7 @@
     },
     "solo-helper": {
       "locked_version": "0.0.1",
-      "git": "https://github.com/glennpratt/solo-helper_cookbook.git",
+      "git": "https://github.com/glennpratt/solo-helper_cookbook",
       "ref": "183b6e411c930ac8e7c638ad3cb10cae6a8af8fc"
     },
     "database": {
