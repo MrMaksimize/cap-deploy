@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Zotero Biblio Tagcloud feature.
+ */
+
+include_once 'zotero_biblio_tagcloud.features.inc';

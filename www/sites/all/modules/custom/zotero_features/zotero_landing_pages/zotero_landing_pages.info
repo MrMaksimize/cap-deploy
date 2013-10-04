@@ -1,0 +1,15 @@
+name = Zotero Landing Pages
+core = 7.x
+package = Zotero Features
+dependencies[] = page_manager
+dependencies[] = taxonomy
+dependencies[] = views
+dependencies[] = views_content
+dependencies[] = zotero_biblio_settings
+features[ctools][] = page_manager:pages_default:1
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[page_manager_pages][] = landing_pages
+features[views_view][] = landing_pages
+features_exclude[dependencies][ctools] = ctools
+project path = sites/all/modules/custom/zotero_features

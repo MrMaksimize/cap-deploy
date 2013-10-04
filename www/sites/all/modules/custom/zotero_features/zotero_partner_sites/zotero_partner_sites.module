@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Zotero Partner Sites feature.
+ */
+
+include_once 'zotero_partner_sites.features.inc';

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Zotero Feeds Importer feature.
+ */
+
+include_once 'zotero_feeds_importer.features.inc';

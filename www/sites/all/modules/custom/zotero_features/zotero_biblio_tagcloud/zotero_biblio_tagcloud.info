@@ -1,0 +1,13 @@
+name = Zotero Biblio Tagcloud
+core = 7.x
+package = Zotero Biblio
+php = 5.2.4
+dependencies[] = ctools
+dependencies[] = fe_block
+dependencies[] = strongarm
+dependencies[] = tagclouds
+features[ctools][] = strongarm:strongarm:1
+features[fe_block_settings][] = tagclouds-2
+features[features_api][] = api:2
+features[variable][] = tagclouds_block_tags_2
+project path = sites/all/modules/custom/zotero_features

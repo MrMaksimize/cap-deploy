@@ -1,39 +1,27 @@
-set :stages, %w(development)
-set :default_stage, "development"
+set :stages, %w(prod dev local)
+set :default_stage, "dev"
 require 'capistrano/ext/multistage'
 
-set :application, "site-deploy"
+set :application, "capdeploy"
 set :user, "vagrant"
-# set :group, "dialout"
-set :use_sudo, false
+set :group, "www-data"
 
 set :scm, :git
 set :repository,  "https://github.com/dsdobrzynski/cap-deploy.git"
 set :scm_passphrase, ""
-set :deploy_to, "/var/drupals/capistrano"
+set :deploy_to, "/var/drupals/capdeploy"
 set :deploy_via, :remote_cache
 
+set :drupal_path, "#{deploy_to}/current/www"
+set :ref_db_name, "capdeploy_db.sql"
+
 task :backup_site do
-  run "cd /var/drupals/capistrano/www && drush archive-dump --destination=/var/drupals/capistrano/backups/backup_`date +\"%Y-%m-%d-%T\"`.tar"
+  run "drush archive-dump --root=#{deploy_to}/current/www --destination=#{deploy_to}/build/backups/site/$(date +%m-%d-%Y-%T)_site.tar"
 end
 
-task :apply_changes do
-  run "cd /var/drupals/capistrano/www"
-  run "drush updb -y"
-  run "drush rr -y"
-  run "drush fra -y"
-  run "drush updb -y"
-  run "drush cc all"
+task :backup_database do
+  run "drush sql-dump --root=#{deploy_to} --result-file=#{deploy_to}/build/backups/db/$(date +%m-%d-%Y-%T)_db.sql"
 end
-
-before "deploy:update_code", "backup_site"
-
-after "deploy:update_code", "apply_changes"
-
-# role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-# role :app, "your app-server here"                          # This may be the same as your `Web` server
-# role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-# role :db,  "your slave db-server here"
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
