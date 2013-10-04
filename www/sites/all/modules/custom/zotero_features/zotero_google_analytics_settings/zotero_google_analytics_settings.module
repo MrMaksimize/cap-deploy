@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Zotero Google Analytics Settings feature.
- */
-
-include_once 'zotero_google_analytics_settings.features.inc';

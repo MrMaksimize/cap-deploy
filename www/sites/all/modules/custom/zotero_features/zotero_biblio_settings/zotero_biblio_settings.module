@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Zotero Biblio Settings feature.
- */
-
-include_once 'zotero_biblio_settings.features.inc';

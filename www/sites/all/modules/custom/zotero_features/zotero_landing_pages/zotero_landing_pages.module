@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Zotero Landing Pages feature.
- */
-
-include_once 'zotero_landing_pages.features.inc';
