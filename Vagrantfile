@@ -1,8 +1,8 @@
 
 Vagrant.configure("2") do |config|
   # Variables to Change
-  project_name = 'cm22master'
-  box_ip = '10.33.10.41'
+  project_name = 'cm22deploy'
+  box_ip = '10.33.10.43'
   box_memory = 2048
   # End Variables To Change
 

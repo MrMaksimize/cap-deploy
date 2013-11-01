@@ -1,27 +1,31 @@
 set :stages, %w(prod dev local)
-set :default_stage, "dev"
+set :default_stage, "local"
 require 'capistrano/ext/multistage'
 
-set :application, "capdeploy"
+set :application, "cm22deploy"
 set :user, "vagrant"
 set :group, "www-data"
 
 set :scm, :git
-set :repository,  "https://github.com/dsdobrzynski/cap-deploy.git"
+set :repository,  "git@github.com:MrMaksimize/CM22Slave.git"
 set :scm_passphrase, ""
-set :deploy_to, "/var/drupals/capdeploy"
+set :deploy_to, "/vagrant/rtests"
+set :current_deploy, "/vagrant/rtests/current"
 set :deploy_via, :remote_cache
 
-set :drupal_path, "#{deploy_to}/current/www"
-set :ref_db_name, "capdeploy_db.sql"
+set :drupal_path, "#{deploy_to}/build"
+set :src_path, "#{deploy_to}/src"
+#set :ref_db_name, "capdeploy_db.sql"
 
-task :backup_site do
-  run "drush archive-dump --root=#{deploy_to}/current/www --destination=#{deploy_to}/build/backups/site/$(date +%m-%d-%Y-%T)_site.tar"
-end
 
-task :backup_database do
-  run "drush sql-dump --root=#{deploy_to} --result-file=#{deploy_to}/build/backups/db/$(date +%m-%d-%Y-%T)_db.sql"
-end
+
+#task :backup_site do
+#  run "drush archive-dump --root=#{deploy_to}/current/www --destination=#{deploy_to}/build/backups/site/$(date +%m-%d-%Y-%T)_site.tar"
+#end
+
+#task :backup_database do
+#  run "drush sql-dump --root=#{deploy_to} --result-file=#{deploy_to}/build/backups/db/$(date +%m-%d-%Y-%T)_db.sql"
+#end
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
